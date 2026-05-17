@@ -19,6 +19,8 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 import google.generativeai as genai
+from dotenv import load_dotenv
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 # Import read/write from db_handler — no circular imports
 from experts.db_handler import (
@@ -34,7 +36,9 @@ from experts.db_handler import (
 # CONFIG
 # =========================================================
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 genai.configure(api_key=GEMINI_API_KEY)
 MODEL = "gemini-1.5-flash"
 
@@ -52,6 +56,10 @@ FALLBACK_TOPICS = [
 # HELPERS
 # =========================================================
 
+@retry(
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=2, max=10)
+)
 def _ask_gemini(prompt: str) -> str:
     """Send a prompt to Gemini and return response text."""
     model = genai.GenerativeModel(MODEL)
@@ -805,10 +813,42 @@ class StrategyOptimizer:
                 best_score    = result["fit_score"]
                 best_strategy = variation
 
-        best_strategy["optimized_for"]     = symbol_name
+        best_strategy["optimized_for"]      = symbol_name
         best_strategy["optimization_score"] = best_score
         best_strategy["symbol_type"]        = SymbolAnalyzer.get_symbol_type(symbol_analysis)
         best_strategy["_optimized_at"]      = str(datetime.now())
+
+        # Determine best entry_tf for this symbol based on its type
+        # chart_expert.py reads this to pick the right timeframe
+        symbol_type = SymbolAnalyzer.get_symbol_type(symbol_analysis)
+        vol_level   = symbol_analysis["volatility_profile"].get(
+            "daily", {}
+        ).get("volatility_level", "medium")
+
+        # Entry tf comes from symbol characteristics, not hardcoded
+        if "trending" in symbol_type:
+            if vol_level == "high":
+                # Volatile trending — use 15min for precision
+                best_strategy["entry_tf"] = "15min"
+            else:
+                # Smooth trending — 1h for cleaner signals
+                best_strategy["entry_tf"] = "1h"
+        elif "mean_reverting" in symbol_type:
+            if vol_level == "low":
+                # Calm mean-reverting — daily is fine
+                best_strategy["entry_tf"] = "daily"
+            else:
+                # Active mean-reverting — 30min
+                best_strategy["entry_tf"] = "30min"
+        else:
+            # Mixed/ranging — 15min default
+            best_strategy["entry_tf"] = "15min"
+
+        # Override with strategy-learned timeframe if it exists
+        # (from YouTube/book knowledge that specified a timeframe)
+        learned_tf = best_strategy.get("timeframe", None)
+        if learned_tf and isinstance(learned_tf, str) and learned_tf != "":
+            best_strategy["entry_tf"] = learned_tf
 
         return best_strategy
 

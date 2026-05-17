@@ -8,6 +8,7 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 
 import google.generativeai as genai
+from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from youtube_transcript_api import YouTubeTranscriptApi
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -27,8 +28,11 @@ from experts.db_handler import (
 # CONFIG
 # =========================================================
 
-GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY")
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+load_dotenv()
+
+# Use .strip() to handle any accidental trailing/leading spaces in .env
+GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "").strip()
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "").strip()
 
 genai.configure(api_key=GEMINI_API_KEY)
 

@@ -22,6 +22,8 @@ QUERIES_DIR        = "knowledge/queries"
 CONFLICTS_PATH     = "knowledge/conflicts_log.json"
 OPTIMIZED_DIR      = "strategies/optimized"
 MASTER_DIR         = "strategies/master"
+DATA_DIR           = "data"
+MODELS_DIR         = "models"
 
 
 def ensure_dirs():
@@ -33,6 +35,8 @@ def ensure_dirs():
         QUERIES_DIR,
         OPTIMIZED_DIR,
         MASTER_DIR,
+        DATA_DIR,
+        MODELS_DIR,
     ]:
         os.makedirs(path, exist_ok=True)
 
