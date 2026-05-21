@@ -17,7 +17,6 @@ youtube-transcript-api>=0.6.0
 # ── PDF Reading ───────────────────────────────────────────
 pdfplumber>=0.10.0
 pdf2image>=1.16.0
-poppler
 
 # ── Retry / Resilience ────────────────────────────────────
 tenacity>=8.2.0
