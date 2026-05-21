@@ -55,7 +55,7 @@ if not YOUTUBE_API_KEY:
     print("WARNING: YOUTUBE_API_KEY not set. Add it to your .env file.")
 
 genai.configure(api_key=GEMINI_API_KEY)
-MODEL = "gemini-1.5-flash-latest"
+MODEL = "gemini-1.5-flash"
 
 # =========================================================
 # CHANNEL DATABASE
@@ -383,7 +383,7 @@ def _extract_rules_from_pdf_images(pdf_path: str, book_key: str) -> dict:
     No file upload — avoids ResumableUploadError on large files.
     """
     try:
-        from pdf2image import convert_from_path
+        from pdf2image import convert_from_path, pdfinfo_from_path
     except ImportError:
         print("  pdf2image not installed — run: pip install pdf2image")
         return {}
@@ -406,26 +406,43 @@ Return JSON only:
 }}
 Return JSON only."""
 
-    print(f"  Converting PDF pages to images...")
+    poppler_bin = r"C:\Program Files\poppler-26.02.0\Library\bin"
+
+    print(f"  Reading PDF info...")
     try:
-        pages = convert_from_path(pdf_path, dpi=100)
+        info = pdfinfo_from_path(pdf_path, poppler_path=poppler_bin)
+        total_pages = info["Pages"]
     except Exception as e:
-        print(f"  PDF conversion error: {e}")
+        print(f"  PDF info error: {e}")
         return {}
 
-    total      = len(pages)
     batch_size = 8
     results    = []
+    total_batches = (total_pages + batch_size - 1) // batch_size
 
-    print(f"  Processing {total} pages in batches of {batch_size}...")
-    for i in range(0, total, batch_size):
-        batch     = pages[i:i + batch_size]
-        batch_num = i // batch_size + 1
-        total_b   = (total + batch_size - 1) // batch_size
-        print(f"  Batch {batch_num}/{total_b} (pages {i+1}-{min(i+batch_size, total)})")
+    print(f"  Processing {total_pages} pages in {total_batches} batches...")
+
+    for batch_idx in range(total_batches):
+        first_page = batch_idx * batch_size + 1
+        last_page  = min(first_page + batch_size - 1, total_pages)
+        batch_num  = batch_idx + 1
+
+        print(f"  Batch {batch_num}/{total_batches} (pages {first_page}-{last_page})")
+
+        try:
+            batch_pages = convert_from_path(
+                pdf_path,
+                dpi=100,
+                first_page=first_page,
+                last_page=last_page,
+                poppler_path=poppler_bin
+            )
+        except Exception as e:
+            print(f"  PDF conversion error at batch {batch_num}: {e}")
+            continue
 
         imgs = []
-        for page in batch:
+        for page in batch_pages:
             buf = io.BytesIO()
             page.save(buf, format="JPEG", quality=55)
             imgs.append(base64.b64encode(buf.getvalue()).decode())
@@ -435,7 +452,7 @@ Return JSON only."""
             if result:
                 results.append(result)
         except Exception as e:
-            print(f"  Batch {batch_num} error: {e}")
+            print(f"  Batch {batch_num} API error: {e}")
 
         time.sleep(2)
 

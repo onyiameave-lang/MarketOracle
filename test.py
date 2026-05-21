@@ -44,6 +44,34 @@ def test_env():
     assert gemini  and "your_" not in gemini,  "GEMINI_API_KEY not set in .env"
     assert youtube and "your_" not in youtube, "YOUTUBE_API_KEY not set in .env"
 
+    # Test Gemini API connectivity with a simple call
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=gemini)
+        model = genai.GenerativeModel("gemini-1.5-flash") # Use the same model as knowledge_base.py
+        response = model.generate_content("test connectivity", generation_config=genai.GenerationConfig(temperature=0.0, max_output_tokens=1))
+        assert response.text is not None, "Gemini API call returned an empty response, possibly blocked."
+    except Exception as e:
+        raise AssertionError(f"Gemini API key might be invalid or have issues: {e}")
+
+    # Test Multimodal (Image) capability
+    try:
+        # Send a tiny 1x1 black pixel in base64 to test multimodal support
+        pixel_b64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        content = ["Identify this pixel color.", {"mime_type": "image/png", "data": pixel_b64}]
+        model.generate_content(content)
+    except Exception as e:
+        raise AssertionError(f"Gemini API multimodal support failed: {e}. Check if MODEL name is correct.")
+    
+    # Test YouTube API connectivity with a simple call
+    try:
+        from googleapiclient.discovery import build
+        youtube_client = build("youtube", "v3", developerKey=youtube)
+        # Attempt to get details for a well-known channel (e.g., GoogleDevelopers)
+        youtube_client.channels().list(part="id", id="UC_x5XG1OV2P6uZZ5FSM9Ttw").execute()
+    except Exception as e:
+        raise AssertionError(f"YouTube API key might be invalid or have issues: {e}")
+
 test("API keys in .env", test_env)
 
 # ── 2. Dependencies ───────────────────────────────────────
