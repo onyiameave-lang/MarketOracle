@@ -1,0 +1,34 @@
+# Environment — never commit API keys
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# Data files — too large for git
+data/*.csv
+data/*.xlsx
+
+# Trained models
+models/
+
+# Results
+results/
+
+# Keep folder structure
+!data/.gitkeep
+!models/.gitkeep
+!results/.gitkeep
+!strategies/optimized/.gitkeep
+!strategies/master/.gitkeep
+!knowledge/raw/.gitkeep
+!knowledge/extracted/.gitkeep
+!knowledge/queries/.gitkeep
