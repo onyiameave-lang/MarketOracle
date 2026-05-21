@@ -55,7 +55,7 @@ if not YOUTUBE_API_KEY:
     print("WARNING: YOUTUBE_API_KEY not set. Add it to your .env file.")
 
 genai.configure(api_key=GEMINI_API_KEY)
-MODEL = "gemini-1.5-flash"
+MODEL = "gemini-1.5-flash-latest"
 
 # =========================================================
 # CHANNEL DATABASE
@@ -65,13 +65,13 @@ MODEL = "gemini-1.5-flash"
 YOUTUBE_CHANNELS = {
     "the_trading_channel": {
         "name":       "The Trading Channel",
-        "handle":     "@TheTradingChannel",
+        "handle":     "@thetradingchannel",
         "channel_id": "UCGL9ubdGcvZh_dvSV2z1hoQ",
         "focus":      ["forex", "price_action", "risk_management"],
     },
     "rayner_teo": {
         "name":       "Rayner Teo",
-        "handle":     "@tradingwithrayner",
+        "handle":     "@tradingwithrayner.",
         "channel_id": "UCFSn-h8wTnhpKJMteN76Abg",
         "focus":      ["trend_following", "swing_trading", "price_action"],
     },
@@ -83,7 +83,7 @@ YOUTUBE_CHANNELS = {
         "focus":      ["smart_money", "liquidity", "market_structure", "order_blocks", "fair_value_gaps"],
     },
     "warrior_trading": {
-        "name":       "Warrior Trading",
+        "name":       "Ross Cameron-Warrior Trading",
         "handle":     "@daytradewarrior",
         # Verified: youtube.com/channel/UCBayuhgYpKNbhJxfExYkPfA
         "channel_id": "UCBayuhgYpKNbhJxfExYkPfA",
@@ -109,7 +109,7 @@ YOUTUBE_CHANNELS = {
     },
     "al_brooks_trading": {
         "name":       "Al Brooks Trading",
-        "handle":     "@AlBrooksTrading",
+        "handle":     "@BrooksTradingCourse",
         "channel_id": "UCgkcoiJK7e33vMUbM5E-OQw",
         "focus":      ["price_action", "market_structure", "advanced_analysis"],
     },
