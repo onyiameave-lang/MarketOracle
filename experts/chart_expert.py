@@ -16,7 +16,12 @@ Actions:
 
 Connects to:
     - strategy_tester.py  → loads optimized strategy config per symbol
+<<<<<<< HEAD
     - knowledger.py       → loads/saves cached strategies
+=======
+    - knowledge_base.py   → translates learned rules into numeric signals
+    - db_handler.py       → loads/saves cached strategies
+>>>>>>> b4a9b09bebd015dcd26a15f2a5f32024a3853a92
 """
 
 import os
@@ -31,6 +36,11 @@ from gymnasium import spaces
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv
 
+<<<<<<< HEAD
+=======
+from dotenv import load_dotenv
+load_dotenv()
+>>>>>>> b4a9b09bebd015dcd26a15f2a5f32024a3853a92
 from experts.db_handler import load_optimized_strategy, load_rules
 
 # =========================================================
@@ -306,7 +316,12 @@ def load_data_bundle(data_dir: str = "data") -> dict:
 
 # Keyword → observation index mapping
 # These keywords come from learned rules in knowledge_base.py
+<<<<<<< HEAD
 RULE_KEYWORDS = {d
+=======
+RULE_KEYWORDS = {
+    "trend":        0,
+>>>>>>> b4a9b09bebd015dcd26a15f2a5f32024a3853a92
     "momentum":     1,
     "support":      2,
     "resistance":   2,
@@ -334,7 +349,12 @@ def rules_to_signals(strategy_config: dict) -> np.ndarray:
     0.0 = concept not present, 1.0 = very high confidence concept.
 
     This is Gap 2 — the bridge between knowledge_base.py text rules
+<<<<<<< HEAD
 
+=======
+    and the RL agent's numeric observation space.
+    """
+>>>>>>> b4a9b09bebd015dcd26a15f2a5f32024a3853a92
     signals = np.zeros(KNOWLEDGE_FEATURE_SIZE, dtype=np.float32)
     counts  = np.zeros(KNOWLEDGE_FEATURE_SIZE, dtype=np.float32)
 
@@ -1101,4 +1121,8 @@ class StrategyTrainer:
             "win_rate":  wins / len(trades) if trades else 0.0,
             "balance":   env.balance,
             "equity":    env.equity,
+<<<<<<< HEAD
         }
+=======
+        }
+>>>>>>> b4a9b09bebd015dcd26a15f2a5f32024a3853a92

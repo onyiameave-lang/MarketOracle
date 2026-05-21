@@ -22,6 +22,11 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
 
+load_dotenv()
+_GEMINI_KEY = __import__('os').getenv("GEMINI_API_KEY", "").strip()
+if _GEMINI_KEY:
+    genai.configure(api_key=_GEMINI_KEY)
+
 # Import read/write from db_handler — no circular imports
 from experts.db_handler import (
     load_rules,

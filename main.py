@@ -11,10 +11,10 @@ Full pipeline:
 """
 
 import os
-import json
-import argparse
 from dotenv import load_dotenv
 load_dotenv()
+import json
+import argparse
 from datetime import datetime
 
 # =========================================================
@@ -42,7 +42,8 @@ def step_learn_knowledge(
 
     print("\n" + "="*60)
     print("STEP 1: KNOWLEDGE LEARNING")
-    print("="*60)    # Learn from channels
+
+    # Learn from channels
     learn_channels = channels or list(YOUTUBE_CHANNELS.keys())
 
     for channel_key in learn_channels:
@@ -366,4 +367,3 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
