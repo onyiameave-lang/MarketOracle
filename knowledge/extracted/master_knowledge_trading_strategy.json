@@ -1,0 +1,595 @@
+{
+  "market_theory": {
+    "technical_analysis_foundations": {
+      "core_assumptions": [
+        "Market discounts everything \u2014 all fundamentals are already priced into the chart",
+        "Prices move in trends \u2014 most technical strategies are built on this",
+        "History repeats itself \u2014 market participants react consistently to similar stimuli",
+        "Charts and graphs can predict changes in demand and supply forces"
+      ],
+      "dow_theory": {
+        "description": "Stock market is not random; guided by specific trends",
+        "trend_types": {
+          "primary": "Major trend lasting less than a year to several years \u2014 can be bullish or bearish",
+          "secondary": "Intermediate corrections within the primary trend",
+          "minor": "Day-to-day movements lasting only a few days"
+        }
+      },
+      "elliot_wave": {
+        "description": "Long-term major patterns consist of five successive waves",
+        "bull_market": "Five-wave impulse structure upward",
+        "bear_market": "Corrective three-wave structure downward"
+      },
+      "weaknesses": [
+        "Requires significant experience to identify and interpret patterns correctly",
+        "Subject to analyst bias",
+        "Must identify patterns quickly before opportunity passes",
+        "Not suitable for new listings with no price history",
+        "Cannot forecast unprecedented events (e.g. 2008 financial crisis)"
+      ]
+    },
+    "smart_money_concept": {
+      "description": "Theory that financial markets are largely controlled by institutions, hedge funds, and governments who leave footprints on charts",
+      "core_idea": "Follow smart money \u2014 identify where institutions are entering and exit with them",
+      "market_makers": "Banks, hedge funds, and large institutions can move substantial capital and allegedly set traps for retail traders",
+      "retail_trap": "Retail traders fall victim to unexpected swings because they ignore institutional footprints"
+    }
+  },
+  "chart_types": {
+    "bar_chart": "Series of vertical lines showing high, low, open, and close for each period",
+    "line_chart": "Connects closing prices over time; does not show high/low/open",
+    "candlestick_chart": {
+      "description": "Shows open, high, low, close with colored bodies",
+      "bullish_candle": "White or clear body \u2014 price closed above open",
+      "bearish_candle": "Red or black body \u2014 price closed below open"
+    },
+    "point_and_figure": "Uses X for rising prices and O for falling prices; not time-based"
+  },
+  "market_structure": {
+    "trend_identification": {
+      "uptrend": "Series of higher highs and higher lows",
+      "downtrend": "Series of lower highs and lower lows",
+      "break_of_structure_BOS": "Price sets a new high or low while breaking through former ones \u2014 signals trend continuation",
+      "change_of_character_CHOCH": "Sudden shift in volatility, volume, or price action suggesting trend weakness and possible reversal",
+      "market_structure_shift_MSS": "In an uptrend: a lower low forms. In a downtrend: a higher high forms. Usually follows displacement"
+    },
+    "support_and_resistance": {
+      "support": "Price level where demand is strong enough to prevent further decline; buyers step in as price cheapens",
+      "resistance": "Price level where selling pressure prevents further advance; sellers increase and buyers decrease",
+      "role_reversal": "A broken resistance level becomes new support, and vice versa"
+    }
+  },
+  "ict_concepts": {
+    "liquidity": {
+      "buy_side_liquidity": "Area on chart where short-sellers have placed stop orders (above swing highs)",
+      "sell_side_liquidity": "Area on chart where bullish traders have placed stop orders (below swing lows)",
+      "zones_location": "Typically found at extremes of price volatility \u2014 tops and bottoms of price patterns"
+    },
+    "displacement": {
+      "description": "Sudden, forceful price movement \u2014 appears as consecutive long candles with minimal wicks in one direction",
+      "outcomes": [
+        "Almost always results in a Market Structure Shift",
+        "Almost always creates a Fair Value Gap"
+      ]
+    },
+    "inducement": {
+      "description": "Peaks of mini-counter-trends within a larger trend",
+      "purpose": "Smart money stop-loss hunting on lower timeframes",
+      "signal": "Once inducement level is reached and extra liquidity enters, price reverses and continues original trend"
+    },
+    "fair_value_gap_FVG": {
+      "description": "Three-candle pattern with a larger center candle and a gap between its wicks and surrounding candles",
+      "significance": "FVGs tend to be filled at some point in the future",
+      "trading_use": "ICT traders set orders anticipating the gap will be filled"
+    },
+    "optimal_trade_entry_OTE": {
+      "description": "Entry point identified using Fibonacci levels after Inducement \u2192 Displacement \u2192 MSS \u2192 FVG sequence",
+      "fibonacci_range": "61.8% to 78.6% retracement of an expansion range"
+    },
+    "balanced_price_range_BPR": {
+      "description": "Two Fair Value Gaps created by two opposite Displacements in quick succession",
+      "behavior": "Price oscillates between extremes trying to fill both FVGs",
+      "resolution": "Original trend resumes once BPR limits are breached"
+    },
+    "order_blocks": {
+      "description": "Candle (or group of candles) where institutional orders were placed before a major move",
+      "identification": "Often appears as a ranging/consolidation area before a sharp directional move",
+      "trading_use": "Price returns to order blocks as a point of interest for re-entry"
+    },
+    "trading_sessions": {
+      "asian_session": "Sets initial trading range",
+      "london_session": "Manipulation phase \u2014 often sweeps Asian session highs/lows",
+      "new_york_session": "True directional move; completes the market cycle"
+    }
+  },
+  "smart_money_concepts_SMC": {
+    "order_blocks_OB": {
+      "description": "Market condition where central banks and institutions accumulate or distribute large quantities of an asset",
+      "appearance": "Appears as a ranging market on the chart",
+      "tools_for_identification": [
+        "Level 2 market data",
+        "Volume indicators"
+      ]
+    },
+    "breaker_blocks": "Order blocks that fail to hold price; institutions intentionally break support/resistance to trigger retail stop-losses",
+    "fair_value_gaps_FVG": "Market moves quickly from one price to another leaving a gap \u2014 signals significant shift in market sentiment",
+    "break_of_structure_BOS": "Price sets new high/low while breaking former ones \u2014 trend continuation signal",
+    "change_of_character_CHOCH": "Abrupt behavioral shift in the market signaling trend weakness or reversal",
+    "liquidity_types": [
+      "Trendline liquidity",
+      "Buy-side liquidity (above swing highs)",
+      "Sell-side liquidity (below swing lows)",
+      "Double tops / equal highs",
+      "Double bottoms / equal lows"
+    ]
+  },
+  "liquidity_sweep": {
+    "definition": "Market moves aggressively to trigger large pools of orders (stop losses, pending orders) in specific liquidity zones",
+    "purpose": "Generates market momentum; large players use it to fill large orders before the real move",
+    "vs_break_of_structure": {
+      "liquidity_sweep": {
+        "intent": "Clean out accumulated orders and generate momentum",
+        "result": "Short-term momentum; potential entry/exit insights",
+        "duration": "Short-term, often reverses"
+      },
+      "break_of_structure": {
+        "intent": "Signal trend continuation or change in direction",
+        "result": "Possible long-term trend change",
+        "duration": "Longer-term directional move"
+      },
+      "key_note": "What looks like a sweep on higher timeframe may look like BoS on lower timeframe"
+    },
+    "where_to_spot": [
+      "Equal highs and swing highs \u2014 sell orders accumulate here",
+      "Equal lows and swing lows \u2014 buy orders accumulate here",
+      "Dynamic trend lines and channels",
+      "Order blocks and order flow areas",
+      "Prior support and resistance levels",
+      "Fibonacci retracement and extension levels"
+    ],
+    "liquidity_grab_vs_sweep": {
+      "sweep": "Broader market movement through a liquidity zone triggering large volumes; can affect significant price range",
+      "grab": "Specific, short-lived move to trigger orders before reversing; more tactical"
+    }
+  },
+  "entry_conditions": [
+    {
+      "rule": "Identify the primary trend using market structure (higher highs/higher lows = uptrend; lower highs/lower lows = downtrend)",
+      "confidence": 0.95,
+      "source": "SMC / ICT"
+    },
+    {
+      "rule": "Enter long only after a bullish liquidity sweep (sell-side liquidity cleared) followed by CHoCH confirmation on lower timeframe",
+      "confidence": 0.9,
+      "source": "ICT Liquidity Sweep Strategy"
+    },
+    {
+      "rule": "Enter short only after a bearish liquidity sweep (buy-side liquidity cleared) followed by CHoCH confirmation",
+      "confidence": 0.9,
+      "source": "ICT Liquidity Sweep Strategy"
+    },
+    {
+      "rule": "Look for valid single-candle liquidity sweep on higher timeframe (HTF) before entering on lower timeframe (LTF)",
+      "confidence": 0.88,
+      "source": "ICT"
+    },
+    {
+      "rule": "Use Fibonacci 61.8%\u201378.6% retracement for Optimal Trade Entry (OTE) after displacement and FVG form",
+      "confidence": 0.85,
+      "source": "ICT OTE"
+    },
+    {
+      "rule": "Wait for confirmed pattern breakout before entering \u2014 a pattern is only complete on actual breakout",
+      "confidence": 0.92,
+      "source": "Chart Patterns (Fidelity)"
+    },
+    {
+      "rule": "Apply confirmation filters (intrabar, multiple closes, time, percentage) before acting on a breakout",
+      "confidence": 0.87,
+      "source": "Chart Patterns (Fidelity)"
+    },
+    {
+      "rule": "For SMC: identify high-probability order block after CHoCH, then wait for price to retrace into it",
+      "confidence": 0.88,
+      "source": "SMC"
+    },
+    {
+      "rule": "For gap plays: wait for throwback after breakout gap \u2014 if throwback does not fill gap, place buy entry above high of gap bar (pivot)",
+      "confidence": 0.82,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "Trade pullbacks in Flags and Pennants in direction of prior sharp move \u2014 target equals height of flagpole",
+      "confidence": 0.83,
+      "source": "Chart Patterns"
+    }
+  ],
+  "exit_conditions": [
+    {
+      "rule": "For liquidity sweep longs: target next swing high (next buy-side liquidity pool)",
+      "confidence": 0.88,
+      "source": "Liquidity Sweep"
+    },
+    {
+      "rule": "For liquidity sweep shorts: target next swing low (next sell-side liquidity pool)",
+      "confidence": 0.88,
+      "source": "Liquidity Sweep"
+    },
+    {
+      "rule": "Set take-profit at structural highs (for longs) or structural lows (for shorts)",
+      "confidence": 0.9,
+      "source": "SMC / ICT"
+    },
+    {
+      "rule": "Calculate price target for double top/bottom: height from peak to trough projected from breakout point",
+      "confidence": 0.85,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "For Head and Shoulders: target = distance from head to neckline, projected down from neckline break",
+      "confidence": 0.87,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "For triangles: target = height of pattern added to (or subtracted from) breakout price",
+      "confidence": 0.84,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "Exit or tighten stop when gap is violated after gap entry \u2014 trend assumption breaks down",
+      "confidence": 0.8,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "Once in SMC trade, target the next structural high (long) or structural low (short)",
+      "confidence": 0.87,
+      "source": "SMC"
+    }
+  ],
+  "risk_management": [
+    {
+      "rule": "Place stop loss below the order block for long trades (bullish setup)",
+      "confidence": 0.92,
+      "source": "ICT"
+    },
+    {
+      "rule": "Place stop loss above the order block for short trades (bearish setup)",
+      "confidence": 0.92,
+      "source": "ICT"
+    },
+    {
+      "rule": "Always leave a spread buffer when setting stop loss to mitigate slippage",
+      "confidence": 0.9,
+      "source": "ICT"
+    },
+    {
+      "rule": "Use stop-and-reverse orders on false breakouts: enter on breakout, place protective stop outside breakout bar, and entry stop at same level in opposite direction",
+      "confidence": 0.82,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "Use risk-reward ratio when setting take profit \u2014 fixed ratios (e.g. 1:2, 1:3) are acceptable",
+      "confidence": 0.88,
+      "source": "Liquidity Sweep"
+    },
+    {
+      "rule": "Trading is a game of probability \u2014 never expect 100% win rate; cut losses and let winners run",
+      "confidence": 0.95,
+      "source": "Universal"
+    },
+    {
+      "rule": "Place protective stops based on: trend line / support-resistance level with filter, or percentage/points filter",
+      "confidence": 0.87,
+      "source": "Chart Patterns"
+    },
+    {
+      "rule": "Set stop loss for gap entries initially at gap low, then move below pivot low as trade develops",
+      "confidence": 0.82,
+      "source": "Chart Patterns"
+    }
+  ],
+  "chart_patterns": {
+    "reversal_patterns": {
+      "head_and_shoulders_top": {
+        "description": "Three peaks with center (head) higher than two outer peaks (shoulders)",
+        "signal": "Bearish reversal at end of uptrend",
+        "entry": "Break below neckline (line connecting the two troughs between peaks)",
+        "target": "Distance from head to neckline, projected downward from neckline",
+        "reliability": "One of the lowest failure rates of all patterns"
+      },
+      "inverse_head_and_shoulders": {
+        "description": "Three troughs with center lower than outer troughs",
+        "signal": "Bullish reversal at end of downtrend",
+        "entry": "Break above neckline",
+        "target": "Distance from neckline to head, projected upward"
+      },
+      "double_top": {
+        "description": "Two successive peaks at roughly the same price level separated by a trough",
+        "signal": "Bearish \u2014 appears as M shape",
+        "entry": "Break below middle trough (support line)",
+        "target": "Height from peak to trough, subtracted from breakout price"
+      },
+      "double_bottom": {
+        "description": "Two successive troughs at roughly the same price level separated by a peak",
+        "signal": "Bullish \u2014 appears as W shape",
+        "entry": "Break above middle peak (resistance line)",
+        "target": "Height from trough to peak, added to breakout price"
+      },
+      "triple_top": {
+        "description": "Three distinct peaks at roughly the same price level",
+        "signal": "Bearish reversal",
+        "entry": "Break below the lowest trough or trendline connecting troughs",
+        "target": "Height from highest peak to lowest trough, subtracted from lowest trough"
+      },
+      "triple_bottom": {
+        "description": "Three distinct troughs at roughly the same price level",
+        "signal": "Bullish reversal \u2014 best after sustained decline",
+        "entry": "Break above highest peak or trendline connecting peaks",
+        "target": "Height from peak to trough, added to highest peak"
+      },
+      "rounding_bottom": {
+        "description": "Gradual U-shaped bottom over long period; also called saucer bottom",
+        "signal": "Long-term bullish reversal; best on weekly charts",
+        "entry": "Breakout above both lips of the cup",
+        "note": "Performance ranks about average for bottom patterns"
+      }
+    },
+    "continuation_patterns": {
+      "flag": {
+        "description": "Short consolidation (rectangle/parallelogram) sloping opposite to prior sharp move",
+        "signal": "Trend continuation",
+        "entry": "Breakout in direction of prior trend",
+        "target": "Equal to height of the flagpole"
+      },
+      "pennant": {
+        "description": "Short consolidation in a small triangle shape after a sharp move",
+        "signal": "Trend continuation",
+        "entry": "Breakout of pennant triangle",
+        "target": "Equal to height of the flagpole"
+      },
+      "cup_and_handle": {
+        "description": "Rounded bottom (not V-shaped) with two lips, followed by a handle (flag-like consolidation)",
+        "signal": "Bullish continuation after advance",
+        "entry": "Breakout above both lips from the handle",
+        "target": "Height of right cup lip to bottom of cup, added to breakout price"
+      }
+    },
+    "triangles": {
+      "symmetrical": {
+        "description": "Downward upper trendline + upward lower trendline converging",
+        "breakout": "Can break either direction; best performance is upward",
+        "note": "Many false breakouts \u2014 always confirm breakout",
+        "target": "Height of pattern added/subtracted from breakout price"
+      },
+      "ascending": {
+        "description": "Horizontal upper trendline + upward sloping lower trendline",
+        "breakout": "More commonly upward",
+        "target": "Height of pattern added/subtracted from breakout price"
+      },
+      "descending": {
+        "description": "Downward sloping upper trendline + horizontal lower trendline",
+        "breakout": "Most commonly downward",
+        "note": "Above-average performance on upside break; retracements common",
+        "target": "Height of pattern added/subtracted from breakout price"
+      },
+      "wedge_rising": {
+        "description": "Two trendlines heading same direction upward; price must touch each at least 5 times",
+        "breakout": "Usually downward \u2014 bearish signal",
+        "note": "Below-average performance; retracements very common"
+      },
+      "wedge_falling": {
+        "description": "Two trendlines heading same direction downward",
+        "breakout": "Usually upward \u2014 bullish signal after panic/decline",
+        "note": "Below-average performance"
+      }
+    },
+    "rectangle": {
+      "description": "Trading range with horizontal support and resistance; often has many false breakouts",
+      "signal": "Continuation in breakout direction",
+      "shortfall": "A shortfall (price failing to reach opposite side of range) often indicates eventual breakout direction",
+      "target": "Height of range added (upside) or subtracted (downside) from breakout"
+    },
+    "gaps": {
+      "types": {
+        "breakaway_gap": "Occurs when price breaks out of a congestion area; requires high enthusiasm/volume",
+        "runaway_gap": "Also called measuring gap; occurs mid-trend as traders chase moves; represents panic buying/selling",
+        "exhaustion_gap": "Near end of trend; identified by high volume and large price difference from prior close; signals trend ending"
+      },
+      "gap_pivot_trade": {
+        "setup": "Wait for throwback after gap; if throwback stops without filling gap, that is the pivot low",
+        "entry": "Buy entry above high of the gap bar",
+        "stop": "Initially at gap low; move below pivot low"
+      },
+      "principle": "Gaps generally profitable on breakouts from patterns, trends, support/resistance"
+    }
+  },
+  "candlestick_patterns": {
+    "general_note": "Candlestick patterns are traditionally reversal patterns; best performance after sustained trends",
+    "single_candle": {
+      "doji": {
+        "description": "Open and close at same price; high and low roughly equidistant",
+        "signal": "Indecision; possible warning of price change",
+        "reliability": "Very common but needs confirmation"
+      },
+      "hammer": {
+        "description": "Small body at top of range with long lower wick; bullish signal",
+        "signal": "Potential bottom reversal",
+        "note": "Occurs frequently but below-average performance without confirmation"
+      },
+      "hanging_man": {
+        "description": "Same shape as hammer but appears at top of trend",
+        "signal": "Potential bearish reversal at tops",
+        "note": "Actually breaks in either direction randomly with slight upward bias"
+      },
+      "shooting_star": {
+        "description": "Small body at bottom of range with long upper wick; appears at top",
+        "signal": "Bearish reversal signal",
+        "performance": "Average performance as single candle"
+      },
+      "inverted_hammer": {
+        "description": "Small body with long upper wick at bottom of trend",
+        "signal": "Potential bullish reversal"
+      }
+    },
+    "two_candle": {
+      "engulfing_bullish": {
+        "description": "Short black body followed by tall white body that completely engulfs it",
+        "signal": "Very good performance on downward breakout in downward trend"
+      },
+      "engulfing_bearish": {
+        "description": "Short white body followed by tall black body that completely engulfs it",
+        "signal": "Bearish reversal"
+      },
+      "harami_top": {
+        "description": "Large body followed by small body of opposite color contained within the large body",
+        "signal": "Can break either direction \u2014 not reliably a reversal"
+      },
+      "dark_cloud_cover": {
+        "description": "Second candle opens above first and closes into its body; second is black, first is white",
+        "signal": "Bearish reversal"
+      },
+      "piercing_line": {
+        "description": "Opposite of dark cloud; second candle (white) closes into black first candle body",
+        "signal": "Bullish reversal"
+      },
+      "pipe_bottom": {
+        "description": "Two bars with large ranges at end of major downtrend; second bar closes in upper half",
+        "signal": "Bullish reversal; more reliable on weekly data",
+        "target": "Height of taller bar + distance to shorter bar, added to taller bar"
+      }
+    }
+  },
+  "indicators": [
+    {
+      "name": "Relative Strength Index (RSI)",
+      "formula": "RSI = 100 - 100/(1 + RS), where RS = avg up closes / avg down closes over period",
+      "how_to_use": "Momentum oscillator measuring speed and change of price movements; overbought above 70, oversold below 30",
+      "developer": "J. Welles Wilder"
+    },
+    {
+      "name": "Moving Averages",
+      "how_to_use": "Average of closing prices over a period; used for trend direction and crossover signals",
+      "crossover_signal": "When faster MA crosses above slower MA \u2014 bullish; below \u2014 bearish"
+    },
+    {
+      "name": "Volume",
+      "how_to_use": "Confirms breakouts \u2014 high volume on breakout = valid; low volume = suspect. High volume + large price gap near trend end = exhaustion gap"
+    },
+    {
+      "name": "Fibonacci Retracement",
+      "how_to_use": "Key levels: 23.6%, 38.2%, 50%, 61.8%, 78.6%. ICT uses 61.8%-78.6% for OTE. Traders place orders at these levels creating self-fulfilling liquidity zones"
+    }
+  ],
+  "volatility_patterns": {
+    "inside_bar": {
+      "description": "Second bar's range contained entirely within first bar's range",
+      "signal": "Compression before potential breakout",
+      "entry": "Buy breakout above inside bar close; sell breakdown below inside bar close"
+    },
+    "narrow_range_NR4": {
+      "description": "Fourth bar has a narrower range than the preceding three bars",
+      "signal": "Low volatility compression \u2014 expect breakout",
+      "entry": "Break above or below the narrow range bar"
+    }
+  },
+  "strategy_templates": {
+    "ict_liquidity_sweep_strategy": {
+      "steps": [
+        "Step 1: Identify valid single-candle liquidity sweep pattern on HTF (e.g. daily/H4) \u2014 price sweeps below prior low (bullish) or above prior high (bearish) with one candle, then next candle must not exceed sweep candle",
+        "Step 2: Zoom to LTF (e.g. H1/M15) and wait for CHoCH (Change of Character) confirming market structure shift",
+        "Step 3: Set limit order at newly formed order block or FVG, or midpoint of combined zone",
+        "Step 4: Stop loss below order block (long) or above order block (short), with spread buffer",
+        "Step 5: Take profit at next opposite swing point (swing high for longs, swing low for shorts)"
+      ],
+      "best_for": "Forex, crypto, indices on any timeframe",
+      "win_rate_note": "High win rate reported by practitioners; requires patience for correct setups"
+    },
+    "smc_order_block_strategy": {
+      "steps": [
+        "Step 1: Determine primary trend using market structure (series of HH/HL or LH/LL)",
+        "Step 2: Wait for CHoCH to identify trend change, then look for first pullback",
+        "Step 3: Identify high-probability order block \u2014 one that caused CHoCH, has liquidity below it and FVG above it (for bullish)",
+        "Step 4: Place buy limit at order block zone",
+        "Step 5: Stop loss just below order block; target = structural high"
+      ],
+      "key_insight": "Wait for liquidity to be taken before entry \u2014 market makers take sell-side liquidity before going up"
+    },
+    "liquidity_sweep_with_order_block": {
+      "checklist": [
+        "1. Identify the trend",
+        "2. Identify tradeable Point of Interest (POI) \u2014 bearish or bullish order block",
+        "3. Identify liquidity zone that needs to be swept near the POI",
+        "4. Wait for sweep of that liquidity",
+        "5. Enter from the POI after sweep is confirmed",
+        "6. Set stop loss: above OB for short, below OB for long",
+        "7. Set take profit: next swing high (long) or next swing low (short)"
+      ]
+    },
+    "chart_pattern_breakout_strategy": {
+      "steps": [
+        "Step 1: Identify pattern (H&S, double top/bottom, triangle, flag, etc.)",
+        "Step 2: Wait for confirmed breakout \u2014 do not anticipate",
+        "Step 3: Apply confirmation filter (multiple closes, percentage move)",
+        "Step 4: Enter on break, or wait for throwback/retracement to pattern boundary",
+        "Step 5: Stop loss outside pattern boundary with filter",
+        "Step 6: Target = pattern height projected from breakout point"
+      ],
+      "false_breakout_play": "Enter on breakout, place stop outside opposite side of bar, and also place stop-and-reverse order \u2014 profit whether breakout continues or fails"
+    }
+  },
+  "psychology": [
+    "Trading always carries risk \u2014 losses are part of the game; success requires disciplined execution",
+    "Do not see patterns where there are none \u2014 human tendency to find patterns is dangerous",
+    "Do not stick with original price targets after conditions have changed",
+    "Patience is required \u2014 ICT/SMC requires waiting for specific market conditions before entry",
+    "Do not look backwards \u2014 focus on forward-looking analysis",
+    "SMC narrows trade opportunities by design \u2014 not every price move is tradeable",
+    "Greater Fool Theory: never buy at any price assuming someone will pay more \u2014 value matters"
+  ],
+  "market_regime": [
+    {
+      "condition": "Trending up",
+      "description": "Higher highs and higher lows; look for longs at pullbacks to order blocks or support",
+      "bias": "long"
+    },
+    {
+      "condition": "Trending down",
+      "description": "Lower highs and lower lows; look for shorts at rallies to order blocks or resistance",
+      "bias": "short"
+    },
+    {
+      "condition": "Ranging / consolidation",
+      "description": "Price oscillating between support and resistance; ICT calls this a balanced price range; wait for breakout or trade fades near extremes",
+      "bias": "neutral"
+    },
+    {
+      "condition": "Post-displacement",
+      "description": "After a large fast candle (displacement); expect FVG to form and price to retrace; look for OTE entry",
+      "bias": "directional with displacement"
+    }
+  ],
+  "best_performing_patterns_summary": {
+    "upward_signals": [
+      "Descending Triangle (upside break)",
+      "Rectangle (bottom breaking upward)",
+      "Pipe Bottom",
+      "Inverse Head and Shoulders"
+    ],
+    "downward_signals": [
+      "Flag",
+      "Head and Shoulders Top",
+      "Island Reversal"
+    ],
+    "notes": [
+      "Candlestick patterns best after sustained trends in that direction",
+      "Always confirm breakout before acting",
+      "Retracements after breakout are common \u2014 can be used for entry",
+      "Wedge patterns have below-average performance \u2014 use with caution"
+    ]
+  },
+  "_last_updated": "2026-05-25 19:20:10.791677",
+  "_source": "master_knowledge",
+  "_topic": "trading_strategy",
+  "_source_type": "book",
+  "_weight": 1.5
+}

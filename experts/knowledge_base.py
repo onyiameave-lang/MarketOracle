@@ -20,10 +20,17 @@ import time
 import re
 import base64
 import hashlib
+import shutil
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 
-import google.generativeai as genai
+try:
+    from google import genai
+    NEW_GENAI = True
+except ImportError:
+    import google.generativeai as genai
+    NEW_GENAI = False
+
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -54,8 +61,11 @@ if not GEMINI_API_KEY:
 if not YOUTUBE_API_KEY:
     print("WARNING: YOUTUBE_API_KEY not set. Add it to your .env file.")
 
-genai.configure(api_key=GEMINI_API_KEY)
-MODEL = "gemini-1.5-flash"
+if NEW_GENAI:
+    genai_client = genai.Client(api_key=GEMINI_API_KEY)
+else:
+    genai.configure(api_key=GEMINI_API_KEY)
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # =========================================================
 # CHANNEL DATABASE
@@ -187,6 +197,15 @@ def _ask_gemini(prompt: str, json_mode: bool = False) -> str:
     Retries up to 5x with exponential backoff.
     json_mode=True forces pure JSON response — no preamble text.
     """
+    if NEW_GENAI:
+        cfg = genai.types.GenerateContentConfig(
+            temperature=0.2,
+            responseMimeType="application/json" if json_mode else None,
+        )
+        chat = genai_client.chats.create(model=MODEL, config=cfg, history=[])
+        response = chat.send_message(prompt)
+        return getattr(response, "text", "") or ""
+
     model = genai.GenerativeModel(MODEL)
     if json_mode:
         cfg = genai.GenerationConfig(temperature=0.2, response_mime_type="application/json")
@@ -203,6 +222,20 @@ def _ask_gemini_with_images(images_b64: List[str], prompt: str) -> str:
     No file upload — avoids ResumableUploadError for large PDFs.
     Used for reading scanned trading books page by page.
     """
+    if NEW_GENAI:
+        cfg = genai.types.GenerateContentConfig(
+            temperature=0.2,
+            responseMimeType="application/json",
+        )
+        chat = genai_client.chats.create(model=MODEL, config=cfg, history=[])
+        parts = [genai.types.Part(text=prompt)]
+        for img in images_b64:
+            parts.append(genai.types.Part(
+                inlineData=genai.types.Blob(data=base64.b64decode(img), mimeType="image/jpeg")
+            ))
+        response = chat.send_message(parts)
+        return getattr(response, "text", "") or ""
+
     model   = genai.GenerativeModel(MODEL)
     content = [prompt]
     for img in images_b64:
@@ -315,16 +348,25 @@ def get_video_transcript(video_id: str) -> str:
         print(f"  Transcript from cache: {video_id}")
         return cached
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        full_text  = " ".join([line["text"] for line in transcript])
-        if len(full_text.split()) < 200:
-            print(f"  Transcript too short for {video_id} — skipping")
+        ytt_api = YouTubeTranscriptApi()
+        transcript_data = ytt_api.fetch(video_id, languages=["en"], preserve_formatting=True)
+        full_text = " ".join([line["text"] for line in transcript_data])
+    except Exception:
+        try:
+            ytt_api = YouTubeTranscriptApi()
+            transcript_list = ytt_api.list(video_id)
+            transcript = transcript_list.find_transcript(["en"])
+            transcript_data = transcript.fetch(preserve_formatting=True)
+            full_text = " ".join([line["text"] for line in transcript_data])
+        except Exception as e:
+            print(f"  Transcript error for {video_id}: {e}")
             return ""
-        save_raw_transcript(video_id, full_text)
-        return full_text
-    except Exception as e:
-        print(f"  Transcript error for {video_id}: {e}")
+
+    if len(full_text.split()) < 200:
+        print(f"  Transcript too short for {video_id} — skipping")
         return ""
+    save_raw_transcript(video_id, full_text)
+    return full_text
 
 # =========================================================
 # TEXT CHUNKING — sentence-aware
@@ -406,14 +448,24 @@ Return JSON only:
 }}
 Return JSON only."""
 
-    poppler_bin = r"C:\Program Files\poppler-26.02.0\Library\bin"
+    poppler_path = None
+    if os.name == "nt":
+        poppler_path = r"C:\Program Files\poppler-26.02.0\Library\bin"
+    else:
+        pdftoppm_path = shutil.which("pdftoppm")
+        if pdftoppm_path:
+            poppler_path = os.path.dirname(pdftoppm_path)
 
     print(f"  Reading PDF info...")
     try:
-        info = pdfinfo_from_path(pdf_path, poppler_path=poppler_bin)
+        info = pdfinfo_from_path(pdf_path, poppler_path=poppler_path)
         total_pages = info["Pages"]
     except Exception as e:
-        print(f"  PDF info error: {e}")
+        print(
+            "  PDF info error: Unable to get page count. "
+            "Install poppler-utils or add pdftoppm/pdfinfo to PATH."
+        )
+        print(f"    Details: {e}")
         return {}
 
     batch_size = 8
@@ -435,7 +487,7 @@ Return JSON only."""
                 dpi=100,
                 first_page=first_page,
                 last_page=last_page,
-                poppler_path=poppler_bin
+                poppler_path=poppler_path
             )
         except Exception as e:
             print(f"  PDF conversion error at batch {batch_num}: {e}")

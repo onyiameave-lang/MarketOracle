@@ -1,0 +1,48 @@
+{
+  "entry_conditions": [],
+  "exit_conditions": [],
+  "risk_management": [],
+  "market_structure": [
+    {
+      "rule": "The long term major patterns in markets may consist of five successive steps or five waves.",
+      "confidence": 1.0
+    },
+    {
+      "rule": "Markets can be categorized into Bull market and Bear market.",
+      "confidence": 1.0
+    },
+    {
+      "rule": "In a Bull market, Elliot Wave theory suggests a pattern of five impulse waves (1, 2, 3, 4, 5) followed by three corrective waves (A, B, C).",
+      "confidence": 0.9
+    },
+    {
+      "rule": "In a Bear market, Elliot Wave theory suggests a pattern of five impulse waves (1, 2, 3, 4, 5) in the downward direction, followed by three corrective waves (A, B, C) in the upward direction, completing a 'Cycle'.",
+      "confidence": 0.9
+    }
+  ],
+  "chart_patterns": [
+    {
+      "pattern": "Elliot Wave (Bull Market)",
+      "description": "A pattern consisting of five impulse waves (labeled 1, 2, 3, 4, 5) in the direction of the primary trend, where waves 1, 3, and 5 are impulse waves and waves 2 and 4 are corrective waves. This is followed by three corrective waves (labeled A, B, C) against the primary trend."
+    },
+    {
+      "pattern": "Elliot Wave (Bear Market)",
+      "description": "A pattern consisting of five impulse waves (labeled 1, 2, 3, 4, 5) in the downward direction of the primary trend, followed by three corrective waves (labeled A, B, C) in the upward direction, completing a full market 'Cycle'."
+    }
+  ],
+  "indicators": [],
+  "psychology": [
+    {
+      "rule": "Greater Fool Theory: The belief that one can always buy investments at any given price, setting aside valuations, and eventually turn them into a profit because there will always be a 'Greater Fool' willing to pay a higher price.",
+      "confidence": 1.0
+    }
+  ],
+  "key_concepts": [
+    "Elliot Wave Theory: Developed by Ralph Nelson Elliot, it states that long term major patterns in financial markets may consist of five successive steps or five waves.",
+    "Price Charts: Visual representations of market data, typically showing opening price, high price, low price, and closing price.",
+    "Bar Charts: A popular technique for showing price variation and volume on a particular day. Each data point is represented by a vertical line showing the high and low for the trading period, along with the closing price. The open and close are represented by horizontal dashes on the vertical line."
+  ],
+  "_last_updated": "2026-05-25 20:05:25.592743",
+  "_source": "book_technical_analysis_kanu_jain",
+  "_topic": "full"
+}

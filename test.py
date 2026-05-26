@@ -8,6 +8,7 @@ Usage:
     python test.py
 """
 
+import base64
 import os
 import sys
 import json
@@ -41,16 +42,34 @@ print("\n1. Environment")
 def test_env():
     gemini  = os.getenv("GEMINI_API_KEY", "").strip()
     youtube = os.getenv("YOUTUBE_API_KEY", "").strip()
-    assert gemini  and "your_" not in gemini,  "GEMINI_API_KEY not set in .env"
-    assert youtube and "your_" not in youtube, "YOUTUBE_API_KEY not set in .env"
+    assert gemini  and "your_" not in gemini,  "GEMINI_API_KEY not set in environment"
+    assert youtube and "your_" not in youtube, "YOUTUBE_API_KEY not set in environment"
 
     # Test Gemini API connectivity with a simple call
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=gemini)
-        model = genai.GenerativeModel("gemini-1.5-flash") # Use the same model as knowledge_base.py
-        response = model.generate_content("test connectivity", generation_config=genai.GenerationConfig(temperature=0.0, max_output_tokens=1))
-        assert response.text is not None, "Gemini API call returned an empty response, possibly blocked."
+        try:
+            from google import genai
+            NEW_GENAI = True
+        except ImportError:
+            import google.generativeai as genai
+            NEW_GENAI = False
+
+        if NEW_GENAI:
+            client = genai.Client(api_key=gemini)
+            chat = client.chats.create(
+                model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+                config=genai.types.GenerateContentConfig(temperature=0.0),
+            )
+            response = chat.send_message("test connectivity")
+            assert getattr(response, "text", None) is not None, "Gemini API call returned an empty response, possibly blocked."
+        else:
+            genai.configure(api_key=gemini)
+            model = genai.GenerativeModel(os.getenv("GEMINI_MODEL", "gemini-2.5-flash"))
+            response = model.generate_content(
+                "test connectivity",
+                generation_config=genai.GenerationConfig(temperature=0.0, max_output_tokens=1),
+            )
+            assert response.text is not None, "Gemini API call returned an empty response, possibly blocked."
     except Exception as e:
         raise AssertionError(f"Gemini API key might be invalid or have issues: {e}")
 
@@ -58,8 +77,18 @@ def test_env():
     try:
         # Send a tiny 1x1 black pixel in base64 to test multimodal support
         pixel_b64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
-        content = ["Identify this pixel color.", {"mime_type": "image/png", "data": pixel_b64}]
-        model.generate_content(content)
+        if NEW_GENAI:
+            client = genai.Client(api_key=gemini)
+            chat = client.chats.create(model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"))
+            response = chat.send_message([
+                genai.types.Part(text="Identify this pixel color."),
+                genai.types.Part(
+                    inlineData=genai.types.Blob(data=base64.b64decode(pixel_b64), mimeType="image/png")
+                ),
+            ])
+        else:
+            content = ["Identify this pixel color.", {"mime_type": "image/png", "data": pixel_b64}]
+            model.generate_content(content)
     except Exception as e:
         raise AssertionError(f"Gemini API multimodal support failed: {e}. Check if MODEL name is correct.")
     
@@ -102,10 +131,13 @@ def test_structure():
         "experts/data_downloader.py",
         "data_downloader.py",
         "main.py",
-        ".env",
     ]
     for f in required:
         assert os.path.exists(f), f"Missing: {f}"
+
+    if not os.path.exists(".env"):
+        assert os.getenv("GEMINI_API_KEY"), ".env is missing and GEMINI_API_KEY is not set in the environment"
+        assert os.getenv("YOUTUBE_API_KEY"), ".env is missing and YOUTUBE_API_KEY is not set in the environment"
 
 test("All required files present", test_structure)
 
