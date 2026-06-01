@@ -292,6 +292,11 @@ def main():
         help="Skip strategy optimization (use cached configs)"
     )
     parser.add_argument(
+        "--skip-gemini",
+        action="store_true",
+        help="Skip all Gemini-based learning and optimization"
+    )
+    parser.add_argument(
         "--timesteps",
         type=int,
         default=500_000,
@@ -327,6 +332,11 @@ def main():
     print("  MARKETORACLE — AI TRADING SYSTEM")
     print("="*60)
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+    if args.skip_gemini:
+        args.skip_learning = True
+        args.skip_optimization = True
+        print("\nSkipping Gemini-based learning and optimization (--skip-gemini)")
 
     # ── Step 1: Learn knowledge ───────────────────────────
     if not args.skip_learning:

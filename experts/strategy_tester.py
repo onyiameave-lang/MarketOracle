@@ -18,14 +18,23 @@ import pandas as pd
 from datetime import datetime
 from typing import Dict, List, Optional
 
-import google.generativeai as genai
+try:
+    from google import genai
+    NEW_GENAI = True
+except ImportError:
+    import google.generativeai as genai
+    NEW_GENAI = False
+
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 load_dotenv()
 _GEMINI_KEY = __import__('os').getenv("GEMINI_API_KEY", "").strip()
-if _GEMINI_KEY:
-    genai.configure(api_key=_GEMINI_KEY)
+if NEW_GENAI:
+    genai_client = genai.Client(api_key=_GEMINI_KEY)
+else:
+    if _GEMINI_KEY:
+        genai.configure(api_key=_GEMINI_KEY)
 
 # Import read/write from db_handler — no circular imports
 from experts.db_handler import (
@@ -44,8 +53,11 @@ from experts.db_handler import (
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-genai.configure(api_key=GEMINI_API_KEY)
-MODEL = "gemini-1.5-flash"
+if NEW_GENAI:
+    genai_client = genai.Client(api_key=GEMINI_API_KEY)
+else:
+    genai.configure(api_key=GEMINI_API_KEY)
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # Topics to search when loading rules from knowledge base
 # Tries each topic in order until rules are found
@@ -67,6 +79,12 @@ FALLBACK_TOPICS = [
 )
 def _ask_gemini(prompt: str) -> str:
     """Send a prompt to Gemini and return response text."""
+    if NEW_GENAI:
+        cfg = genai.types.GenerateContentConfig(temperature=0.2)
+        chat = genai_client.chats.create(model=MODEL, config=cfg, history=[])
+        response = chat.send_message(prompt)
+        return getattr(response, "text", "") or ""
+
     model = genai.GenerativeModel(MODEL)
     response = model.generate_content(
         prompt,
@@ -491,6 +509,10 @@ class MasterStrategyBuilder:
             if cached:
                 print(f"  Master strategy loaded from cache")
                 return cached
+
+        if not GEMINI_API_KEY:
+            print("  GEMINI_API_KEY not configured — skipping master strategy build")
+            return {}
 
         if not all_strategies:
             print("  No strategies available to build master from")

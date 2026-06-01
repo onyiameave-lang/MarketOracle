@@ -20,14 +20,22 @@ import time
 import re
 import base64
 import hashlib
+import shutil
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 
-import google.generativeai as genai
+try:
+    from google import genai
+    NEW_GENAI = True
+except ImportError:
+    import google.generativeai as genai
+    NEW_GENAI = False
+
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.proxies import GenericProxyConfig
 from tenacity import retry, stop_after_attempt, wait_exponential
 import pdfplumber
 
@@ -48,14 +56,52 @@ load_dotenv()
 
 GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "").strip()
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "").strip()
+YOUTUBE_PROXY = os.getenv("YOUTUBE_PROXY", "").strip()
+YOUTUBE_PROXY_HTTP = os.getenv("YOUTUBE_PROXY_HTTP", "").strip() or os.getenv("HTTP_PROXY", "").strip()
+YOUTUBE_PROXY_HTTPS = os.getenv("YOUTUBE_PROXY_HTTPS", "").strip() or os.getenv("HTTPS_PROXY", "").strip()
+YOUTUBE_PROXY_RETRIES = int(os.getenv("YOUTUBE_PROXY_RETRIES", "2"))
 
 if not GEMINI_API_KEY:
     print("WARNING: GEMINI_API_KEY not set. Add it to your .env file.")
 if not YOUTUBE_API_KEY:
     print("WARNING: YOUTUBE_API_KEY not set. Add it to your .env file.")
 
-genai.configure(api_key=GEMINI_API_KEY)
-MODEL = "gemini-1.5-flash"
+if NEW_GENAI:
+    genai_client = genai.Client(api_key=GEMINI_API_KEY)
+else:
+    genai.configure(api_key=GEMINI_API_KEY)
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+
+class _YouTubeProxyConfig(GenericProxyConfig):
+    def __init__(self, http_url: str = None, https_url: str = None, retries: int = 0):
+        super().__init__(http_url=http_url, https_url=https_url)
+        self._retries = retries
+
+    @property
+    def retries_when_blocked(self) -> int:
+        return self._retries
+
+
+def _get_youtube_transcript_api() -> YouTubeTranscriptApi:
+    proxy_config = None
+    if YOUTUBE_PROXY:
+        proxy_config = _YouTubeProxyConfig(
+            http_url=YOUTUBE_PROXY,
+            https_url=YOUTUBE_PROXY,
+            retries=YOUTUBE_PROXY_RETRIES,
+        )
+    elif YOUTUBE_PROXY_HTTP or YOUTUBE_PROXY_HTTPS:
+        proxy_config = _YouTubeProxyConfig(
+            http_url=YOUTUBE_PROXY_HTTP or None,
+            https_url=YOUTUBE_PROXY_HTTPS or None,
+            retries=YOUTUBE_PROXY_RETRIES,
+        )
+
+    if proxy_config:
+        print("WARNING: Using YouTube proxy for transcript downloads.")
+        return YouTubeTranscriptApi(proxy_config=proxy_config)
+    return YouTubeTranscriptApi()
 
 # =========================================================
 # CHANNEL DATABASE
@@ -187,6 +233,15 @@ def _ask_gemini(prompt: str, json_mode: bool = False) -> str:
     Retries up to 5x with exponential backoff.
     json_mode=True forces pure JSON response — no preamble text.
     """
+    if NEW_GENAI:
+        cfg = genai.types.GenerateContentConfig(
+            temperature=0.2,
+            responseMimeType="application/json" if json_mode else None,
+        )
+        chat = genai_client.chats.create(model=MODEL, config=cfg, history=[])
+        response = chat.send_message(prompt)
+        return getattr(response, "text", "") or ""
+
     model = genai.GenerativeModel(MODEL)
     if json_mode:
         cfg = genai.GenerationConfig(temperature=0.2, response_mime_type="application/json")
@@ -203,6 +258,20 @@ def _ask_gemini_with_images(images_b64: List[str], prompt: str) -> str:
     No file upload — avoids ResumableUploadError for large PDFs.
     Used for reading scanned trading books page by page.
     """
+    if NEW_GENAI:
+        cfg = genai.types.GenerateContentConfig(
+            temperature=0.2,
+            responseMimeType="application/json",
+        )
+        chat = genai_client.chats.create(model=MODEL, config=cfg, history=[])
+        parts = [genai.types.Part(text=prompt)]
+        for img in images_b64:
+            parts.append(genai.types.Part(
+                inlineData=genai.types.Blob(data=base64.b64decode(img), mimeType="image/jpeg")
+            ))
+        response = chat.send_message(parts)
+        return getattr(response, "text", "") or ""
+
     model   = genai.GenerativeModel(MODEL)
     content = [prompt]
     for img in images_b64:
@@ -304,6 +373,12 @@ def get_channel_videos(
 # TRANSCRIPT FETCHING — LEVEL 1 CACHED
 # =========================================================
 
+def _fetch_youtube_transcript(video_id: str) -> List[dict]:
+    """Fetch transcript data using the configured YouTubeTranscriptApi client."""
+    ytt_api = _get_youtube_transcript_api()
+    return ytt_api.fetch(video_id, languages=["en"], preserve_formatting=True)
+
+
 def get_video_transcript(video_id: str) -> str:
     """
     Returns transcript for a video.
@@ -314,17 +389,24 @@ def get_video_transcript(video_id: str) -> str:
     if cached:
         print(f"  Transcript from cache: {video_id}")
         return cached
+
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        full_text  = " ".join([line["text"] for line in transcript])
-        if len(full_text.split()) < 200:
-            print(f"  Transcript too short for {video_id} — skipping")
-            return ""
-        save_raw_transcript(video_id, full_text)
-        return full_text
+        transcript_data = _fetch_youtube_transcript(video_id)
+        full_text = " ".join([line["text"] for line in transcript_data])
     except Exception as e:
         print(f"  Transcript error for {video_id}: {e}")
+        err_text = str(e).lower()
+        if "blocking" in err_text or "blocked" in err_text:
+            print("  YouTube appears to be blocking transcript requests from this environment.")
+            print("  If you are running in a cloud container, use YOUTUBE_PROXY or HTTPS_PROXY to route requests through a different IP.")
         return ""
+
+    if len(full_text.split()) < 200:
+        print(f"  Transcript too short for {video_id} — skipping")
+        return ""
+
+    save_raw_transcript(video_id, full_text)
+    return full_text
 
 # =========================================================
 # TEXT CHUNKING — sentence-aware
@@ -376,6 +458,17 @@ Text:
     return _consolidate_rules(results) if results else {}
 
 
+def _extract_text_from_pdf(pdf_path: str) -> str:
+    """Attempt to extract embedded text from a PDF before falling back to images."""
+    try:
+        with pdfplumber.open(pdf_path) as pdf:
+            pages = [page.extract_text() or "" for page in pdf.pages]
+        return "\n".join(pages).strip()
+    except Exception as e:
+        print(f"  PDF text extraction failed: {e}")
+        return ""
+
+
 def _extract_rules_from_pdf_images(pdf_path: str, book_key: str) -> dict:
     """
     Reads a scanned PDF by converting pages to JPEG batches
@@ -406,21 +499,31 @@ Return JSON only:
 }}
 Return JSON only."""
 
-    poppler_bin = r"C:\Program Files\poppler-26.02.0\Library\bin"
+    poppler_path = None
+    if os.name == "nt":
+        poppler_path = r"C:\Program Files\poppler-26.02.0\Library\bin"
+    else:
+        pdftoppm_path = shutil.which("pdftoppm")
+        if pdftoppm_path:
+            poppler_path = os.path.dirname(pdftoppm_path)
 
     print(f"  Reading PDF info...")
     try:
-        info = pdfinfo_from_path(pdf_path, poppler_path=poppler_bin)
+        info = pdfinfo_from_path(pdf_path, poppler_path=poppler_path)
         total_pages = info["Pages"]
     except Exception as e:
-        print(f"  PDF info error: {e}")
+        print(
+            "  PDF info error: Unable to get page count. "
+            "Install poppler-utils or add pdftoppm/pdfinfo to PATH."
+        )
+        print(f"    Details: {e}")
         return {}
 
-    batch_size = 8
+    batch_size = 2
     results    = []
     total_batches = (total_pages + batch_size - 1) // batch_size
 
-    print(f"  Processing {total_pages} pages in {total_batches} batches...")
+    print(f"  Processing {total_pages} pages in {total_batches} smaller batches...")
 
     for batch_idx in range(total_batches):
         first_page = batch_idx * batch_size + 1
@@ -435,7 +538,7 @@ Return JSON only."""
                 dpi=100,
                 first_page=first_page,
                 last_page=last_page,
-                poppler_path=poppler_bin
+                poppler_path=poppler_path
             )
         except Exception as e:
             print(f"  PDF conversion error at batch {batch_num}: {e}")
@@ -638,13 +741,33 @@ def _learn_text_book(book_key: str, book: dict) -> dict:
 
 def _learn_scanned_book(book_key: str, book: dict) -> dict:
     """
-    Scanned PDFs processed as image batches.
-    No Gemini file upload — eliminates ResumableUploadError.
+    Scanned PDFs may still contain a hidden text layer.
+    Try native text extraction first before sending images to Gemini.
     """
+    raw_text = load_raw_book_text(book_key)
+    if not raw_text:
+        print("  Attempting PDF text extraction before image processing...")
+        raw_text = _extract_text_from_pdf(book["path"])
+        if raw_text:
+            print("  PDF text extracted directly — using text extraction path.")
+            save_raw_book_text(book_key, raw_text)
+            rules = _extract_rules_from_text(raw_text)
+            if rules:
+                save_rules(f"book_{book_key}", "full", rules)
+                return rules
+            print("  Direct text extraction yielded no rules; falling back to image processing.")
+    else:
+        print("  Raw text loaded from cache.")
+        rules = _extract_rules_from_text(raw_text)
+        if rules:
+            save_rules(f"book_{book_key}", "full", rules)
+            return rules
+        print("  Cached raw text present but no rules extracted. Falling back to image processing.")
+
     print("  Scanned PDF — processing as image batches...")
     rules = _extract_rules_from_pdf_images(book["path"], book_key)
     if not rules:
-        print("  No rules extracted.")
+        print("  No rules extracted from scanned PDF.")
         return {}
     save_rules(f"book_{book_key}", "full", rules)
     return rules
