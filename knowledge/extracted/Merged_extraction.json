@@ -1,0 +1,361 @@
+{
+  "entry_conditions": [
+    {
+      "rule": "Enter a short trade if a bearish engulfing candlestick forms at a key resistance level or at the top of an uptrend.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Enter a long trade if a bullish engulfing candlestick forms at a key support level or at the bottom of a downtrend.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Buy when the price closes above a Simple Moving Average (SMA) within an established upward trend after having fallen below it.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Buy when a shorter-term moving average (e.g., 50-day SMA) crosses over a longer-term moving average (e.g., 200-day SMA).",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Sell when a shorter-term moving average (e.g., 50-day SMA) crosses under a longer-term moving average (e.g., 200-day SMA).",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Enter a long or short trade promptly via limit orders on a lower-timeframe newly identified order block or fair value gap (or their combined midpoint) once a single-candle liquidity sweep on the higher timeframe is confirmed by a Change of Character (CHoCH).",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Use buy stop orders to enter long positions automatically once the price breaks out above a trend line, support, or resistance level.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "To trade a false breakout, enter in the direction of the initial breakout, place a protective stop outside the breakout bar, and place an entry stop at that same level (stop and reverse order) to profit if the breakout fails and traps traders.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Explosion Gap Pivot Method: After a gap occurs, wait for a counter-trend throwback. If the throwback stops without covering the gap (forming a pivot low), place a buy entry order above the high of the gap bar.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Inside Bar Strategy: Buy the next bar at the opening if it moves above the inside bar's close, or sell the next bar at the opening if it moves below the inside bar's close.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Narrow Range (NR4) Strategy: Enter a trade on a breakout above or below the high or low of the fourth bar if its range is narrower than the preceding three bars.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "SMC Strategy: Place a buy entry just above a high-probability bullish order block (one that caused a CHoCH and has liquidity and a fair value gap directly above it) after confirming the primary trend has shifted to bullish.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Enter high-momentum day trades on low-float stocks when the price breaks out over the pre-market high on high relative volume.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Execute trend-following long entries on pullbacks when the price touches the 20-period Exponential Moving Average (EMA) and prints a bullish rejection candle.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Sell short a stock immediately when it breaks below a clear bull-trap pattern or flat-top support level on expanding volume.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Sell an out-of-the-money put option (credit spread) on a high-quality stock when the implied volatility rank is high and the stock is trading at a major structural support level.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Enter algorithmic mean-reversion trades when the 14-period RSI crosses below 20 and the historical Z-score of the asset price is lower than -2.0.",
+      "confidence": 0.95
+    }
+  ],
+  "exit_conditions": [
+    {
+      "rule": "Place target profits at the next opposite swing point in the price movement (e.g., target the next swing high for a buy trade, or the next swing low for a sell trade) to lock in gains.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Double Top Target: Calculate the distance from the highest peak to the middle trough, then subtract that height from the breakout price to the downside.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Double Bottom Target: Calculate the distance from the troughs to the middle peak, then add that height to the breakout price to the upside.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Triple Top Target: Take the height from the highest peak to the lowest trough in the pattern, then subtract that amount from the lowest trough breakout line.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Triple Bottom Target: Take the height from the highest peak to the lowest trough in the pattern, then add that amount to the highest peak breakout line.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Rectangle Target: Measure the vertical height from the resistance line to the support line, then add it to the resistance line for an upside breakout, or subtract it from the support line for a downside breakout.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Triangle Target (Symmetrical, Ascending, Descending): Measure the height from the highest peak to the lowest trough in the pattern, then add it to (for upward breakouts) or subtract it from (for downward breakouts) the breakout price.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Wedge Target: For a downward breakout, target the lowest trough in the pattern. For an upward breakout, add the pattern's total height to the breakout price.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Head and Shoulders Top Target: Measure the vertical distance from the head to the neckline, then project that exact distance downward from the neckline breakout point.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Cup and Handle Target: Take the height from the right cup lip to the bottom of the cup bowl, then add that amount to the handle breakout price.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Flag and Pennant Target: Measure the height from the start of the preceding 'flagpole' to the highest peak of the pattern, then add that amount to the bottom of the consolidation pattern for an upward target.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Two-Day Reversal (Pipe Bottom) Target: Take the vertical height from the taller of the two reversal bars to the lower of the two bars, then add that amount to the taller bar.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Exit any long scalp trade immediately if the price fails to break the new high within three consecutive candles after your breakout entry.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Take 50% profit when price hits a 1:1 risk-to-reward ratio, and trail the remaining position behind the most recent higher low or lower high.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Exit option positions when they reach 50% of the maximum potential profit to maximize win rate and capital efficiency.",
+      "confidence": 0.9
+    }
+  ],
+  "risk_management": [
+    {
+      "rule": "Apply confirmation filters (such as intrabar, multiple closes, time, percentage/point, or money) to verify whether an actual breakout has taken place before entering.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "When entering a breakout, place a protective stop outside the breakout bar, opposite from the breakout direction, to cap initial capital risk.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "In the explosion gap pivot strategy, place protective stops initially at the gap low and subsequently trail them below the established pivot low.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "When implementing the Liquidity Sweep strategy in an uptrend, place the stop loss below the order block. In a downtrend, position the stop loss above the order block, always leaving a buffer for spread to mitigate slippage.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "SMC Risk Management: Set the stop loss strictly below the identified bullish order block zone to preserve capital if the market moves against the trade.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Avoid trading individual asset contract months that have low open interest to prevent liquidity risk and severe drawdowns.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Place protective stops for long positions just below round numbers, and sell orders/stops for short positions just above round numbers, to account for psychological clustering.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Never risk more than 1% to 2% of total trading account equity on any individual trade.",
+      "confidence": 0.98
+    },
+    {
+      "rule": "Always trade with an emergency hard stop-loss order placed directly in the broker server architecture, never a mental stop loss.",
+      "confidence": 0.99
+    },
+    {
+      "rule": "Halt all manual or automated trading operations for the day once a maximum daily drawdown threshold of 3% is breached.",
+      "confidence": 0.95
+    }
+  ],
+  "market_structure": [
+    {
+      "rule": "Prices move in trends that possess three distinct directions (uptrend, downtrend, sideways/trendless) and three classifications (major/primary, intermediate/secondary, near-term/minor).",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Dow Theory: A major trend is assumed to remain in effect until it gives definite technical signals that it has reversed.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Dow Theory Confirmation: The market averages (such as the Industrial and Transportation averages) must confirm each other to validate a structural market trend change.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Volume must confirm the trend, meaning volume should expand/increase in the direction of the primary trend and diminish/contract during counter-trend corrections.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Support is the price level where demand is strong enough to overcome selling pressure and prevent further decline; resistance is where selling pressure is strong enough to prevent further price advances.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Role Reversal: Broken support levels become resistance levels on subsequent rallies, and broken resistance levels become support levels on subsequent pullbacks.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "A valid trendline requires at least two points to be initially drawn, and a third consecutive test/bounce to confirm its validity.",
+      "confidence": 0.9
+    },
+    {
+      "rule": "Gaps represent critical structural levels; unfilled gaps higher create support zones while unfilled gaps lower create resistance zones.",
+      "confidence": 0.85
+    },
+    {
+      "rule": "Elliot Wave Theory: Long-term major market patterns consist of a series of five successive steps or five waves in the primary direction before a corrective cycle.",
+      "confidence": 0.8
+    },
+    {
+      "rule": "A Market Structure Shift (MSS) is marked by a lower low in an uptrend or a higher high in a downtrend, typically occurring immediately after a forceful displacement.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "A Break of Structure (BoS) occurs when the price breaks through a defined support or resistance level during a trending market with the clear intent of trend continuation.",
+      "confidence": 0.95
+    },
+    {
+      "rule": "Market structure is inherently fractal; a higher-timeframe point of interest contains smaller internal trends, structures, and cycles on lower timeframes.",
+      "confidence": 0.95
+    }
+  ],
+  "chart_patterns": [
+    {
+      "pattern": "Head and Shoulders Top",
+      "description": "A major trend-reversal pattern forming at the peaks of an upward trend. It features three distinct peaks where the center peak (head) is higher than the outer two (shoulders). The pattern activates when the price breaks down below the neckline connecting the intermediate troughs."
+    },
+    {
+      "pattern": "Inverted Head and Shoulders (Bottom)",
+      "description": "The exact inverse of the head-and-shoulders top, appearing at the end of a downtrend to signal an impending upward trend reversal once the neckline is broken to the upside."
+    },
+    {
+      "pattern": "Double Top / Double Bottom",
+      "description": "Reversal patterns illustrating a trend's failed attempts to continue. They form a pattern resembling an 'M' (Double Top at peaks indicating losing buyer interest) or a 'W' (Double Bottom at troughs indicating the start of a bullish trend)."
+    },
+    {
+      "pattern": "Triple Top / Triple Bottom",
+      "description": "Horizontal congestion reversal patterns consisting of three distinct peaks or troughs hitting roughly the same price level, separated by intermittent pullbacks, activated upon a structural breakout."
+    },
+    {
+      "pattern": "Rectangles",
+      "description": "A horizontal congestion pattern where the price action is bounded within a trading range between parallel support and resistance lines. It frequently features false breakouts before a true breakout completes."
+    },
+    {
+      "pattern": "Symmetrical Triangle",
+      "description": "A consolidation pattern bounded by a downward-sloping upper trendline and an upward-sloping lower trendline, requiring prices to touch each bound at least twice."
+    },
+    {
+      "pattern": "Ascending Triangle",
+      "description": "A bullish continuation pattern bounded by a straight, horizontal upper resistance line and an upward-sloping lower support trendline."
+    },
+    {
+      "pattern": "Descending Triangle",
+      "description": "A bearish continuation pattern bounded by a straight, horizontal lower support line and a downward-sloping upper resistance trendline."
+    },
+    {
+      "pattern": "Wedge",
+      "description": "A chart pattern bounded by two trendlines heading in the same direction (converging upward or downward). The price must touch the trendlines at least five times total (3 times on one line, 2 times on the other) before breaking out."
+    },
+    {
+      "pattern": "Cup and Handle",
+      "description": "A bullish continuation pattern consisting of a rounded, U-shaped consolidation bottom (the cup) followed by a smaller, slightly downward-sloping trading range on the right side (the handle). A breakout above the cup's lips signals trend resumption."
+    },
+    {
+      "pattern": "Flags and Pennants",
+      "description": "Short-term continuation patterns characterized by a steep, sharp price change (the flagpole) followed by a brief, tight consolidation phase shaped as a small rectangle/parallelogram (flag) or small triangle (pennant)."
+    },
+    {
+      "pattern": "Doji",
+      "description": "A single-candle candlestick pattern formed when the opening and closing prices are identical, and the high and low are roughly equidistant. It signifies market indecision and warns of a potential price change."
+    },
+    {
+      "pattern": "Harami",
+      "description": "A two-candle pattern where a large body candle is followed by a small body candle of the opposite color (a spinning top) that is entirely contained within the vertical range of the first candle's body."
+    },
+    {
+      "pattern": "Hanging Man / Hammer",
+      "description": "One-candle patterns featuring a small body at the top of the range and a long lower wick with little to no upper wick. A hammer occurs at downtrend bottoms as a bullish reversal; a hanging man occurs at uptrend peaks but can break randomly with a slight upward bias."
+    },
+    {
+      "pattern": "Shooting Star / Inverted Hammer",
+      "description": "One-candle patterns featuring a small body at the bottom of the range and a long upper wick. Shooting stars have black bodies at market peaks; inverted hammers typically have white bodies at market troughs."
+    },
+    {
+      "pattern": "Engulfing",
+      "description": "A two-bar candlestick pattern where the body of the second candle completely overlaps or engulfs the entire body of the first candle."
+    },
+    {
+      "pattern": "Dark Cloud Cover / Piercing Line",
+      "description": "Two-bar reversal patterns. Dark cloud cover occurs at tops where a strong white candle is followed by a black candle closing deeply into the first candle's body. Piercing line is the opposite bottom pattern, where a white candle closes deeply into a preceding black candle's body."
+    },
+    {
+      "pattern": "Two-Bar Reversal / Pipe Bottom",
+      "description": "A bottom reversal pattern consisting of two highly volatile consecutive bars with ranges larger than preceding bars. The first bar closes near its low, and the second bar closes in the upper half of its range."
+    },
+    {
+      "pattern": "Inside Bar",
+      "description": "A short-term volatility pattern where a price bar's entire high-to-low range is completely contained within the high-to-low range of the immediately preceding bar, indicating declining volatility."
+    },
+    {
+      "pattern": "Narrow Range (NR4)",
+      "description": "A low-volatility four-bar pattern where the fourth bar features a total price range that is narrower than the independent ranges of the three preceding days."
+    }
+  ],
+  "indicators": [
+    {
+      "name": "Moving Averages (Simple Moving Average - SMA)",
+      "how_to_use": "Calculated by averaging security closing prices on a regular daily basis. Used to smoothly track trend direction and generate directional buy/sell signals when price crosses the line, or when two different SMAs cross each other."
+    },
+    {
+      "name": "Exponential Moving Average (EMA)",
+      "how_to_use": "Applies more weight to recent prices. Use the 20 EMA for short-term dynamic support/resistance in momentum trends, and the 50/200 EMAs for long-term structural direction."
+    },
+    {
+      "name": "Relative Strength Index (RSI)",
+      "how_to_use": "A momentum oscillator developed by J. Welles Wilder that mathematically measures the speed and change of price movements based on a ratio of up closes to down closes over x days. It identifies overbought areas (typically when reading above 70) and oversold areas (typically when reading below 30)."
+    },
+    {
+      "name": "Volume",
+      "how_to_use": "The total number of shares, contracts, or units traded during a specific period. It is plotted at the bottom of price charts and evaluated simultaneously with price action to confirm the strength of chart breakouts, trend extensions, and pattern validation."
+    },
+    {
+      "name": "Open Interest",
+      "how_to_use": "The total number of outstanding, unliquidated futures contracts held by market participants at the end of the day. Used by technical analysts to identify contract months with high liquidity and to interpret cash flow into or out of a specific futures market."
+    }
+  ],
+  "psychology": [
+    "Market history tends to repeat itself because human market participants inherently provide consistent, predictable psychological reactions to similar market stimuli over time.",
+    "The Greater Fool Theory is the psychological belief that an investor can profitably purchase an asset at any price regardless of its true valuation, because there will always be an even greater fool willing to pay an even higher price down the line.",
+    "Human cognitive biases create common investment dangers, such as seeing patterns where none exist, blindly believing market lore without factual evidence, looking backward rather than forward, and remaining anchored to original price targets after fundamental conditions alter.",
+    "Support and resistance levels are psychologically created and reinforced by the behavior of three distinct market groups trying to resolve emotional regret: the longs (who want to buy more cheap), the shorts (who want to escape at break-even), and the uncommitted (who realize a trend shift has occurred).",
+    "Round numbers act as major psychological support and resistance barriers because retail traders possess a strong mental tendency to round off orders and cluster stops at these specific clean numbers.",
+    "Retail trading traps are frequently set by institutional Smart Money, who purposefully drive prices into known retail stop-loss clusters to harvest liquidity and fill massive orders.",
+    "Accepting responsibility for losses is a prerequisite for consistency. The market does not care about your personal financial needs or opinions.",
+    "Execution paralysis or FOMO occurs when a trader values individual trade outcomes over a statistically validated sample size of trades."
+  ],
+  "key_concepts": [
+    "Technical Analysis Rationale (The market action discounts everything, price moves in trends, and history repeats itself).",
+    "Fundamental vs. Technical Analysis (Fundamental studies the causes of market movement like P&L and Balance Sheets; Technical analysis studies the effect via price and volume action).",
+    "Dow Theory Core Principles (The averages discount everything, the three trend classifications, the three major market trend phases, volume confirmation, and trend persistence).",
+    "Elliot Wave Theory Rationale.",
+    "Smart Money Concepts (SMC) vs. Retail Price Action.",
+    "Institutional Order Blocks and Breaker Blocks.",
+    "Fair Value Gaps (FVG) and Balanced Price Ranges (BPR).",
+    "Market Structure Shifts (MSS) vs. Breaks of Structure (BoS).",
+    "Change of Character (CHoCH).",
+    "Buy-Side and Sell-Side Liquidity Pools.",
+    "Smart Money Inducement and Stop-Loss Hunting.",
+    "Optimal Trade Entry (OTE) Fibonacci Ranges (61.8% to 78.6% retracements).",
+    "False Breakouts and Failed Breakout Traps.",
+    "Breakout Confirmation Filters.",
+    "Trend Retracements (Pullbacks vs. Throwbacks).",
+    "Kill Zones (London and New York structural sessions where maximum algorithm algorithmic liquidity expands).",
+    "Low Float Analysis (Trading equities with limited supply to catch massive price expansion).",
+    "Python Algorithmic Backtesting (Validating structural rules programmatically via historical data before live capital deployment)."
+  ]
+}
+
