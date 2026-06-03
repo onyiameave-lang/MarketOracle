@@ -1,0 +1,43 @@
+{
+    "entry_conditions": [
+        {"rule": "Identify an Optimal Trade Entry (OTE) when price retraces into the 61.8% to 78.6% Fibonacci zone[span_0](start_span)[span_0](end_span).", "confidence": 0.95},
+        {"rule": "Look for price to enter a Fair Value Gap (FVG), characterized by a three-candle structure where the middle candle leaves a physical gap between the wicks of the surrounding candles[span_1](start_span)[span_1](end_span).", "confidence": 0.95},
+        {"rule": "Seek entries at clusters of retail stop-losses (Inducements) where market makers hunt liquidity[span_2](start_span)[span_2](end_span).", "confidence": 0.90},
+        {"rule": "Execute trades by identifying order blocks on higher time frames (HTF) and refining the entry on lower time frames (LTF)[span_3](start_span)[span_3](end_span).", "confidence": 0.95}
+    ],
+    "exit_conditions": [
+        {"rule": "Place stop-losses outside the high/low of the three-candle Fair Value Gap structure or opposing order blocks[span_4](start_span)[span_4](end_span).", "confidence": 0.85},
+        {"rule": "Target opposing liquidity pools or major support and resistance zones where trend-following retail traders group their orders[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span).", "confidence": 0.85}
+    ],
+    "risk_management": [
+        {"rule": "Anticipate and budget for institutional stop-loss hunting (manipulation) around major retail support and resistance levels[span_7](start_span)[span_7](end_span).", "confidence": 0.90}
+    ],
+    "market_structure": [
+        {"rule": "Analyze the 24-hour cycle structure, specifically tracking the interplay between the Asian range, London manipulation, and New York sessions to determine intraday sentiment[span_8](start_span)[span_8](end_span).", "confidence": 0.95},
+        {"rule": "Track market structure shifts (MSS) to capture the birth of a new trend rather than assuming random market movements[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span).", "confidence": 0.95},
+        {"rule": "Analyze higher time frame (HTF) order blocks to establish macro market direction before looking for lower time frame execution[span_11](start_span)[span_11](end_span).", "confidence": 0.95}
+    ],
+    "chart_patterns": [
+        {"pattern": "Fair Value Gap (FVG)", "description": "A specific three-candle structure where a large candle sits at the center, leaving a physical gap between the wicks of the first and third candles[span_12](start_span)[span_12](end_span)."},
+        {"pattern": "Order Block", "description": "Specific candle formations on a chart that represent where institutional players or 'Smart Money' have placed large order blocks[span_13](start_span)[span_13](end_span)."},
+        {"pattern": "Traditional Price Gaps", "description": "Occur when a price opens significantly higher or lower than the previous day's close due to sudden shifts in supply and demand[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span)."},
+        {"pattern": "Multi-bar Chart Patterns", "description": "Historical graphical formations used to identify trends and potential market reversals across multiple time frames[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)."}
+    ],
+    "indicators": [
+        {"name": "Fibonacci Retracement", "how_to_use": "Used to pinpoint entries by measuring market pullbacks; Traditional analysis utilizes them as general speed lines or support/resistance, while ICT/SMC maps the 61.8% to 78.6% zone specifically as the Optimal Trade Entry (OTE)[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span)."},
+        {"name": "Mathematical Oscillators (RSI, SMA, MACD)", "how_to_use": "Used in traditional technical analysis as data overlays to gauge market momentum and spot trade entry signals[span_20](start_span)[span_20](end_span)[span_21](start_span)[span_21](end_span)."}
+    ],
+    "psychology": [
+        "Traditional technical analysis operates on the psychological assumption that markets are efficient and all known price-sensitive information is instantly built into the price graph[span_22](start_span)[span_22](end_span).",
+        "ICT/SMC operates on the psychological premise that retail traders are actively induced into bad positions through stop-loss hunting and artificial liquidity generation by market makers[span_23](start_span)[span_23](end_span)."
+    ],
+    "key_concepts": [
+        "Smart Money Concepts (SMC) & Inner Circle Trader (ICT)[span_24](start_span)[span_24](end_span)",
+        "Traditional Technical Analysis & Dow Theory Price Trends[span_25](start_span)[span_25](end_span)",
+        "Liquidity Pools and Inducements[span_26](start_span)[span_26](end_span)",
+        "Optimal Trade Entry (OTE)[span_27](start_span)[span_27](end_span)",
+        "Fractal Nature of Charts (HTF vs. LTF Analysis)[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span)",
+        "Asian, London, and New York Session Intraday Dynamics[span_30](start_span)[span_30](end_span)"
+    ]
+}
+
