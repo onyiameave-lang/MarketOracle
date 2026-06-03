@@ -1,0 +1,31 @@
+{
+  "book_name": "Smart Money Concepts (SMC) & Institutional Trading Guide",
+  "extractions": {
+    "entry_conditions": [
+      "Enter a long or short trade promptly via limit orders on a lower-timeframe newly identified order block or fair value gap...",
+      "SMC Strategy: Place a buy entry just above a high-probability bullish order block..."
+    ],
+    "risk_management": [
+      "When implementing the Liquidity Sweep strategy in an uptrend, place the stop loss below the order block...",
+      "SMC Risk Management: Set the stop loss strictly below the identified bullish order block zone..."
+    ],
+    "market_structure": [
+      "A Market Structure Shift (MSS) is marked by a lower low in an uptrend...",
+      "A Break of Structure (BoS) occurs when the price breaks through a defined support..."
+    ],
+    "psychology": [
+      "Retail trading traps are frequently set by institutional Smart Money..."
+    ],
+    "key_concepts": [
+      "Smart Money Concepts (SMC) vs. Retail Price Action.",
+      "Institutional Order Blocks and Breaker Blocks.",
+      "Fair Value Gaps (FVG) and Balanced Price Ranges (BPR).",
+      "Market Structure Shifts (MSS) vs. Breaks of Structure (BoS).",
+      "Change of Character (CHoCH).",
+      "Buy-Side and Sell-Side Liquidity Pools.",
+      "Smart Money Inducement and Stop-Loss Hunting.",
+      "Optimal Trade Entry (OTE) Fibonacci Ranges."
+    ]
+  }
+}
+
