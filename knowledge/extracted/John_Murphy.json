@@ -1,0 +1,92 @@
+{
+  "book_name": "Technical Analysis of the Financial Markets by John J. Murphy",
+  "extractions": {
+    "entry_conditions": [
+      "Buy when the price closes above a Simple Moving Average (SMA)...",
+      "Buy when a shorter-term moving average crosses over a longer-term moving average...",
+      "Sell when a shorter-term moving average crosses under a longer-term moving average...",
+      "Use buy stop orders to enter long positions automatically...",
+      "To trade a false breakout, enter in the direction of the initial breakout...",
+      "Explosion Gap Pivot Method...",
+      "Inside Bar Strategy...",
+      "Narrow Range (NR4) Strategy..."
+    ],
+    "exit_conditions": [
+      "Place target profits at the next opposite swing point...",
+      "Double Top Target...",
+      "Double Bottom Target...",
+      "Triple Top Target...",
+      "Triple Bottom Target...",
+      "Rectangle Target...",
+      "Triangle Target (Symmetrical, Ascending, Descending)...",
+      "Wedge Target...",
+      "Head and Shoulders Top Target...",
+      "Cup and Handle Target...",
+      "Flag and Pennant Target...",
+      "Two-Day Reversal (Pipe Bottom) Target..."
+    ],
+    "risk_management": [
+      "Apply confirmation filters...",
+      "When entering a breakout, place a protective stop outside the breakout bar...",
+      "In the explosion gap pivot strategy, place protective stops initially at the gap low...",
+      "Avoid trading individual asset contract months that have low open interest...",
+      "Place protective stops for long positions just below round numbers..."
+    ],
+    "market_structure": [
+      "Prices move in trends that possess three distinct directions...",
+      "Dow Theory: A major trend is assumed to remain in effect...",
+      "Dow Theory Confirmation...",
+      "Volume must confirm the trend...",
+      "Support is the price level where demand is strong enough...",
+      "Role Reversal: Broken support levels become resistance levels...",
+      "A valid trendline requires at least two points...",
+      "Gaps represent critical structural levels...",
+      "Elliot Wave Theory..."
+    ],
+    "chart_patterns": [
+      "Head and Shoulders Top",
+      "Inverted Head and Shoulders (Bottom)",
+      "Double Top / Double Bottom",
+      "Triple Top / Triple Bottom",
+      "Rectangles",
+      "Symmetrical Triangle",
+      "Ascending Triangle",
+      "Descending Triangle",
+      "Wedge",
+      "Cup and Handle",
+      "Flags and Pennants",
+      "Doji",
+      "Harami",
+      "Hanging Man / Hammer",
+      "Shooting Star / Inverted Hammer",
+      "Engulfing",
+      "Dark Cloud Cover / Piercing Line",
+      "Two-Bar Reversal / Pipe Bottom",
+      "Inside Bar",
+      "Narrow Range (NR4)"
+    ],
+    "indicators": [
+      "Moving Averages (Simple Moving Average - SMA)",
+      "Relative Strength Index (RSI)",
+      "Volume",
+      "Open Interest"
+    ],
+    "psychology": [
+      "Market history tends to repeat itself...",
+      "The Greater Fool Theory...",
+      "Human cognitive biases create common investment dangers...",
+      "Support and resistance levels are psychologically created...",
+      "Round numbers act as major psychological support..."
+    ],
+    "key_concepts": [
+      "Technical Analysis Rationale...",
+      "Fundamental vs. Technical Analysis...",
+      "Dow Theory Core Principles...",
+      "Elliot Wave Theory Rationale...",
+      "False Breakouts and Failed Breakout Traps...",
+      "Breakout Confirmation Filters...",
+      "Trend Retracements (Pullbacks vs. Throwbacks)."
+    ]
+  }
+}
+
