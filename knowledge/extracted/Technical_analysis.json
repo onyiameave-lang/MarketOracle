@@ -1,0 +1,35 @@
+{
+    "book_title": "Traditional Technical Analysis",
+    "entry_conditions": [
+        {"rule": "Spot entries using multi-bar patterns and mathematical oscillators to gauge momentum[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span).", "confidence": 0.90},
+        {"rule": "Utilize Fibonacci retracement levels mapped as percentages to find speed lines or support/resistance zones for entering trades[span_2](start_span)[span_2](end_span).", "confidence": 0.90}
+    ],
+    "exit_conditions": [
+        {"rule": "Target historical support and resistance zones where trend-following market participants group their orders[span_3](start_span)[span_3](end_span).", "confidence": 0.85}
+    ],
+    "risk_management": [
+        {"rule": "Set risk levels and manage positions based on historical price graphs and identified support/resistance thresholds[span_4](start_span)[span_4](end_span).", "confidence": 0.80}
+    ],
+    "market_structure": [
+        {"rule": "Analyze market behavior under the principle that prices move in trends and do not perform randomly (Dow Theory)[span_5](start_span)[span_5](end_span).", "confidence": 0.95},
+        {"rule": "Evaluate patterns across a fractal structure, tracking weekly, daily, or minute periods to establish trend continuity[span_6](start_span)[span_6](end_span).", "confidence": 0.90}
+    ],
+    "chart_patterns": [
+        {"pattern": "Traditional Price Gaps", "description": "Occur when a asset's price opens significantly higher or lower than the previous day's close due to sudden shifts in supply and demand[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)."},
+        {"pattern": "Multi-bar Chart Patterns", "description": "Historical graphical formations used over various time horizons to identify ongoing trends or potential reversals[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)."}
+    ],
+    "indicators": [
+        {"name": "Mathematical Oscillators (RSI, SMA, MACD)", "how_to_use": "Applied as data overlays to analyze historical data, gauge momentum, and isolate execution signals[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span)."},
+        {"name": "Fibonacci Retracement", "how_to_use": "Charted across price waves to locate structural percentage speed lines or areas of support and resistance[span_13](start_span)[span_13](end_span)."}
+    ],
+    "psychology": [
+        "Operates on the core belief that markets are efficient and that all available price-sensitive information is already fully built into the price graph[span_14](start_span)[span_14](end_span)."
+    ],
+    "key_concepts": [
+        "Dow Theory and Trend Continuity[span_15](start_span)[span_15](end_span)",
+        "Market Efficiency Hypothesis[span_16](start_span)[span_16](end_span)",
+        "Historical Data Analysis[span_17](start_span)[span_17](end_span)",
+        "Multi-Timeframe Fractal Patterns[span_18](start_span)[span_18](end_span)"
+    ]
+}
+
